@@ -1,0 +1,122 @@
+<div id="contentArea" class="container mt-4">
+  <!-- Profil User -->
+ <div class="row mb-4">
+  <div class="col-12">
+    <div class="card shadow">
+      <div class="card-body d-flex flex-column flex-sm-row align-items-center">
+        <img
+          id="fotoUserDashboard"
+          src=""
+          class="rounded-circle border shadow mb-3 mb-sm-0 me-0 me-sm-3"
+          style="width: 80px; height: 80px; object-fit: cover;"
+          alt="Foto User"
+        />
+        <div class="text-center text-sm-start flex-grow-1">
+          <h5 id="namaUserDashboard" class="mb-1 text-success fw-semibold"></h5>
+          <small id="jabatanUserDashboard" class="text-muted d-block mb-2"></small>
+          <div class="alert alert-success p-2 mb-0" style="font-size: 0.95rem">
+            👋 Selamat datang di <strong>Sistem Aplikasi Pengajuan Cuti Online</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+  <!-- Ringkasan Statistik -->
+  <div class="row mb-4">
+    <div class="col-sm-6 col-md-3 mb-3">
+      <div class="card shadow-sm text-center">
+        <div class="card-body">
+          <h6 class="text-muted">Cuti Disetujui</h6>
+          <h5 class="text-success" id="cutiDisetujui">8</h5>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6 col-md-3 mb-3">
+      <div class="card shadow-sm text-center">
+        <div class="card-body">
+          <h6 class="text-muted">Cuti Ditolak</h6>
+          <h5 class="text-danger" id="cutiDitolak">1</h5>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6 col-md-3 mb-3">
+      <div class="card shadow-sm text-center">
+        <div class="card-body">
+          <h6 class="text-muted">Menunggu Persetujuan</h6>
+          <h5 class="text-warning" id="cutiPending">2</h5>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6 col-md-3 mb-3">
+      <div class="card shadow-sm text-center">
+        <div class="card-body">
+          <h6 class="text-muted">Cuti Berlangsung</h6>
+          <h5 class="text-primary" id="cutiBerlangsung">1</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Selamat Datang & Info -->
+  <div class="row">
+    <!-- Kiri -->
+    <div class="col-md-6 mb-3">
+      
+
+      <div class="row">
+        <div class="col-sm-6 mb-2">
+          <div class="card shadow">
+            <div class="card-body text-center text-success">
+              <h5>Sisa Cuti 2025</h5>
+              <p id="sisaCuti">10</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6 mb-2">
+          <div class="card shadow">
+            <div class="card-body text-center text-success">
+              <h5>Cuti Tahunan 2025</h5>
+              <p id="cutiTahunan">5</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card shadow mt-3">
+        <div class="card-header bg-success text-white">
+          Riwayat Pengajuan Terbaru
+        </div>
+        <div class="card-body p-2">
+          <table class="table table-sm table-bordered text-center mb-0">
+            <thead class="table-light">
+              <tr>
+                <th>Tanggal</th>
+                <th>Jenis</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="riwayatCuti">
+              <tr>
+                <td>01 Juli 2025</td>
+                <td>Cuti Tahunan</td>
+                <td><span class="badge bg-warning text-dark">Menunggu</span></td>
+              </tr>
+              <!-- Data akan diganti oleh JavaScript -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Kanan: Kalender -->
+    <div class="col-md-6">
+      <div id="calendar" class="shadow rounded bg-light p-3" style="min-height: 300px">
+        <!-- Kalender muncul di sini -->
+      </div>
+    </div>
+  </div>
+</div>

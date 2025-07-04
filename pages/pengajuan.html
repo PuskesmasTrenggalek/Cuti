@@ -1,0 +1,69 @@
+<!-- Form Cuti -->
+<div class="container mt-4 bg-light rounded p-4 shadow" style="max-width: 800px;">
+  <h4 class="text-success mb-4 fw-bold">Input Cuti Pegawai</h4>
+
+  <form id="formCuti">
+    <div class="row g-3">
+      <div class="col-md-6">
+        <label class="form-label">Nama Pegawai</label>
+        <input type="text" id="namaPegawai" class="form-control" disabled />
+      </div>
+      <div class="col-md-6">
+        <label class="form-label">Jenis Cuti</label>
+        <select id="jenisCuti" class="form-select" required>
+          <option value="">Pilih jenis cuti</option>
+          <option value="Tahunan">Tahunan</option>
+          <option value="Sakit">Sakit</option>
+          <option value="Bersalin">Bersalin</option>
+          <option value="Lainnya">Lainnya</option>
+        </select>
+      </div>
+     <!-- Radio Mode -->
+	<div class="mb-3">
+	  <label class="form-label">Mode Tanggal</label><br>
+	  <div class="form-check form-check-inline">
+	    <input class="form-check-input" type="radio" name="modeTanggal" value="single" />
+	    <label class="form-check-label">Satu Hari</label>
+	  </div>
+	  <div class="form-check form-check-inline">
+	    <input class="form-check-input" type="radio" name="modeTanggal" value="range" />
+	    <label class="form-check-label">Rentang Hari</label>
+	  </div>
+	</div>
+
+
+      <div class="col-md-12">
+        <label class="form-label">Tanggal Cuti</label>
+        <input type="text" id="tanggalCuti" class="form-control" placeholder="Pilih tanggal atau rentang" required />
+      </div>
+
+      <div class="col-md-6">
+        <label class="form-label">Jumlah Hari Cuti</label>
+        <input type="number" id="jumlahCuti" class="form-control" readonly />
+      </div>
+      <div class="col-md-6">
+        <label class="form-label">Kode Cuti</label>
+        <input type="text" id="kodeCuti" class="form-control" readonly />
+      </div>
+
+      <div class="col-md-6">
+        <label class="form-label">Keterangan Cuti</label>
+        <textarea id="alasan" class="form-control" rows="3" required></textarea>
+      </div>
+      <div class="col-md-6">
+        <label class="form-label">Alamat Selama Cuti</label>
+        <textarea id="alamat" class="form-control" rows="3" required></textarea>
+      </div>
+
+      <div class="col-md-6">
+        <label class="form-label">No. Telp Aktif</label>
+        <input type="text" id="telpon" class="form-control" required />
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-success mt-4">
+      <i class="bi bi-send"></i> Buat Permohonan
+    </button>
+  </form>
+</div>
+
