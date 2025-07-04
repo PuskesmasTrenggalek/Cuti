@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login | Cuti PKM TGLK</title>
+
+  <!-- Bootstrap, Icons & SweetAlert -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.12/dist/sweetalert2.min.css" rel="stylesheet" />
+
+  <style>
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: "Segoe UI", sans-serif;
+      background: linear-gradient(135deg, #d0f0e0, #cceeff);
+      background-attachment: fixed;
+    }
+
+    .login-box {
+      max-width: 380px;
+      width: 100%;
+      padding: 2rem;
+      background: #fff;
+      border-radius: 1rem;
+      box-shadow: 0 0 30px rgba(0, 128, 96, 0.1);
+      animation: fadeIn 0.5s ease;
+    }
+
+    .form-control:focus {
+      box-shadow: 0 0 0 0.2rem rgba(25, 135, 84, 0.25);
+      border-color: #198754;
+    }
+
+    .btn-success {
+      background-color: #198754;
+      border: none;
+    }
+
+    .btn-success:hover {
+      background-color: #157347;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="login-box shadow">
+    <h4 class="text-center text-success mb-4">Cuti Puskesmas Trenggalek</h4>
+    <form id="loginForm">
+      <div class="mb-3">
+        <input id="username" class="form-control" placeholder="Username" required />
+      </div>
+      <div class="mb-3">
+        <input id="password" type="password" class="form-control" placeholder="Password" required />
+      </div>
+      <button type="submit" class="btn btn-success w-100">Login</button>
+    </form>
+  </div>
+
+  <!-- Toast container -->
+  <div id="toast-container" class="position-fixed bottom-0 end-0 p-3" style="z-index: 1080"></div>
+
+  <!-- Loading Modal -->
+  <div class="modal fade" id="loadingModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-sm modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-body text-center p-4">
+          <div class="spinner-border text-success mb-2"></div>
+          <p class="mb-0">Loading...</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.12/dist/sweetalert2.all.min.js"></script>
+
+  <script>
+    const API_URL = "https://script.google.com/macros/s/AKfycbz17_iutVR5YQulbalXqL27cjSrFZ3cxYCPYwRov9nureAvq-M_hmQdvkoX89W0ykIZ9A/exec";
+
+    async function hashPassword(password) {
+      const encoder = new TextEncoder();
+      const data = encoder.encode(password);
+      const hashBuffer = await crypto.subtle.digest("SHA-256", data);
+      const hashArray = Array.from(new Uint8Array(hashBuffer));
+      return hashArray.map((b) => b.toString(16).padStart(2, "0")).join("");
+    }
+
+    async function login() {
+      const username = document.getElementById("username").value.trim();
+      const rawPassword = document.getElementById("password").value.trim();
+
+      if (!username || !rawPassword) {
+        showToast("Username dan password wajib diisi!", "warning");
+        return;
+      }
+
+      const password = await hashPassword(rawPassword);
+      const url = `${API_URL}?action=login&username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`;
+      const modal = showLoading("Memproses login...");
+
+      try {
+        const res = await fetch(url);
+        const result = await res.json();
+        hideLoading(modal);
+
+        if (result.success) {
+          showToast("✅ Login berhasil!", "success");
+          localStorage.setItem("user", JSON.stringify(result));
+          setTimeout(() => (window.location.href = "dashboard.html"), 1200);
+        } else {
+          showToast("❌ Username atau password salah!", "danger");
+        }
+      } catch (err) {
+        hideLoading(modal);
+        console.error("Login error:", err);
+        showToast("🚫 Gagal menghubungi server", "danger");
+      }
+    }
+
+    // Event submit
+    document.addEventListener("DOMContentLoaded", () => {
+      document.getElementById("loginForm").addEventListener("submit", function (e) {
+        e.preventDefault();
+        login();
+      });
+    });
+
+    function showToast(message, type = "success") {
+      const toastId = "toast-" + Date.now();
+      const toastHTML = `
+        <div id="${toastId}" class="toast align-items-center text-white bg-${type} border-0 mb-2 shadow-sm" role="alert" data-bs-delay="3000">
+          <div class="d-flex">
+            <div class="toast-body">${message}</div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+          </div>
+        </div>`;
+      const container = document.getElementById("toast-container");
+      container.insertAdjacentHTML("beforeend", toastHTML);
+      new bootstrap.Toast(document.getElementById(toastId)).show();
+    }
+
+    function showLoading(text = "Loading...") {
+      const modalBody = document.querySelector("#loadingModal .modal-body");
+      if (modalBody) modalBody.innerHTML = `
+        <div class="text-center p-3">
+          <div class="spinner-border text-success mb-2" role="status"></div>
+          <p class="mb-0">${text}</p>
+        </div>`;
+      const modal = new bootstrap.Modal(document.getElementById("loadingModal"));
+      modal.show();
+      return modal;
+    }
+
+    function hideLoading(modalInstance) {
+      if (modalInstance) modalInstance.hide();
+    }
+  </script>
+</body>
+</html>

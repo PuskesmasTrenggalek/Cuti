@@ -1,0 +1,317 @@
+/* ========== GLOBAL ========== */
+body {
+  background-color: #f8f9fa;
+  font-family: "Segoe UI", sans-serif;
+}
+
+body.overflow-hidden-x {
+  overflow-x: hidden;
+}
+
+/* ========== SIDEBAR DESKTOP ========== */
+.sidebar {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 300px;
+  padding: 1rem;
+  background-color: #fff;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.05);
+  z-index: 1040;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.sidebar .nav-link {
+  color: #333;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  margin-bottom: 0.3rem;
+  border-radius: 0.375rem;
+}
+
+.sidebar .nav-link:hover,
+.sidebar .nav-link.active {
+  background-color: #a0d19a;
+  color: #1d1e20;
+}
+
+/* Submenu indent */
+.submenu {
+  padding-left: 1.5rem;
+}
+
+/* ========== MAIN CONTENT ========== */
+.main-content {
+  margin-left: 280px;
+  padding: 1rem 2rem 70px;
+  min-height: 100vh;
+  transition: margin-left 0.3s ease;
+}
+
+/* ========== FOOTER ========== */
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 300px;
+  right: 0;
+  background-color: #f8f9fa;
+  border-top: 1px solid #ddd;
+  padding: 0.5rem 1rem;
+  text-align: center;
+  font-size: 14px;
+  z-index: 1040;
+}
+
+/* ========== CARD ========== */
+.card {
+  border: none;
+  border-radius: 1rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+/* ========== NAV ITEM ICON ========== */
+.nav-item .bi {
+  margin-right: 0.5rem;
+}
+
+/* ========== ANIMASI TRANSISI ========== */
+.fade-transition {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in-left {
+  opacity: 0;
+  transform: translateX(-40px);
+  animation: fadeLeft 0.9s ease-out forwards;
+}
+
+.fade-in-right {
+  opacity: 0;
+  transform: translateX(40px);
+  animation: fadeRight 0.9s ease-out forwards;
+}
+
+@keyframes fadeLeft {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeRight {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* ========== LOADING OVERLAY ========== */
+#loadingOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(4px);
+  z-index: 1050;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease;
+}
+
+#loadingOverlay.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* ========== SIDEBAR TOGGLE & ICON ROTATE ========== */
+.menu-toggle {
+  background-color: transparent !important;
+  color: #333 !important;
+  border: none;
+  padding: 0.5rem 1rem;
+  width: 100%;
+  text-align: start;
+}
+
+.menu-toggle:hover,
+.menu-toggle:focus {
+  background-color: #f8f9fa !important;
+}
+
+.menu-toggle .bi-chevron-down {
+  transition: transform 0.3s ease;
+}
+
+.menu-toggle[aria-expanded="true"] .bi-chevron-down {
+  transform: rotate(180deg);
+}
+
+/* ========== OFFCANVAS SIDEBAR (MOBILE) ========== */
+.offcanvas .nav-link,
+.offcanvas .menu-toggle {
+  color: #333 !important;
+}
+
+.offcanvas .nav-link.active,
+.offcanvas .nav-link:focus,
+.offcanvas .nav-link:hover,
+.offcanvas .menu-toggle:hover,
+.offcanvas .menu-toggle:focus {
+  color: #4c6ef5 !important;
+  background-color: #eef1ff !important;
+  font-weight: bold;
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 767px) {
+  .sidebar {
+    display: none !important;
+  }
+
+  .main-content {
+    margin-left: 0;
+  }
+
+  footer {
+    left: 0;
+  }
+
+  .offcanvas-start {
+    width: 75%;
+  }
+
+  .toast {
+    width: 90%;
+  }
+}
+
+@media (max-width: 576px) {
+  .doctor-photo {
+    width: 140px;
+    height: 140px;
+  }
+}
+
+/* ========== AVATAR / FOTO DOKTER ========== */
+.doctor-photo {
+  width: 180px;
+  height: 180px;
+  object-fit: contain;
+  border-radius: 50%;
+  padding: 10px;
+  background-color: #fff;
+  border: 4px solid #4c6ef5;
+  box-shadow: 0 8px 20px rgba(76, 110, 245, 0.25);
+  transition: transform 0.4s ease;
+}
+
+.doctor-photo:hover {
+  transform: scale(1.05);
+}
+
+/* ========== DATATABLES ========== */
+.dt-buttons {
+  margin-bottom: 1rem;
+}
+
+/* ========== TOAST ========== */
+#toastContainer {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 1060;
+}
+
+/* ========== CALENDAR ========== */
+#calendar {
+  max-width: 580px;
+  margin: 0 auto;
+  font-size: 0.65rem;
+  border: 1px solid #dee2e6;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+  border-radius: 30px;
+}
+
+/* ========== ACTIVE MENU LINK HIGHLIGHT ========== */
+.active-link {
+  background-color: #d1e7dd !important;
+  color: #0f5132 !important;
+  font-weight: 600;
+  border-radius: 0.375rem;
+}
+
+.nav-link.active-link i {
+  color: #0f5132 !important;
+}
+
+/* ========== DARK MODE ========== */
+body.dark-mode {
+  background-color: #121212;
+  color: #f1f1f1;
+}
+
+body.dark-mode .navbar,
+body.dark-mode .modal-content,
+body.dark-mode .card,
+body.dark-mode .offcanvas,
+body.dark-mode .sidebar,
+body.dark-mode footer {
+  background-color: #1e1e1e !important;
+  color: #f1f1f1 !important;
+}
+
+body.dark-mode .nav-link,
+body.dark-mode .menu-toggle,
+body.dark-mode .text-muted {
+  color: #f1f1f1 !important;
+}
+
+body.dark-mode .nav-link.active,
+body.dark-mode .nav-link:hover,
+body.dark-mode .menu-toggle:hover {
+  background-color: #333 !important;
+}
+
+body.dark-mode footer {
+  border-color: #444;
+}
+/* Ukuran popup swal */
+.swal-small {
+  max-width: 350px;
+  font-size: 0.9rem;
+}
+
+/* Gunakan Bootstrap button styling agar hover tetap konsisten */
+.swal2-popup .btn {
+  padding: 0.45rem 1.2rem;
+  font-size: 0.875rem;
+  border-radius: 0.375rem;
+  transition: all 0.2s ease-in-out;
+}
+
+.swal2-popup .btn:hover {
+  opacity: 0.85;
+}
