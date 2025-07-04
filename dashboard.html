@@ -37,12 +37,12 @@
     <h5 class="mb-4 text-success"><u>Puskesmas Trenggalek</u></h5>
     <ul class="nav flex-column">
       <li class="nav-item">
-        <a class="nav-link" href="#" onclick="loadPage('dashboard')">
+        <a class="nav-link" href="#" onclick="loadPage('dashboard')" data-close="true">
           <i class="bi bi-speedometer2"></i> Dashboard
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#" onclick="loadPage('pengajuan')">
+        <a class="nav-link" href="#" onclick="loadPage('pengajuan')" data-close="true">
           <i class="bi bi-clipboard-check"></i> Pengajuan Cuti
         </a>
       </li>
@@ -60,12 +60,12 @@
         <div class="collapse" id="profileSidebar">
           <ul class="nav flex-column submenu">
             <li class="nav-item">
-              <a class="nav-link" href="#" onclick="loadPage('dokumenprofile')">
+              <a class="nav-link" href="#" onclick="loadPage('dokumenprofile')" data-close="true">
                 <i class="bi bi-file-earmark-richtext"></i> Dokumen Profile
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#" onclick="loadPage('datasasaran')">
+              <a class="nav-link" href="#" onclick="loadPage('datasasaran')" data-close="true">
                 <i class="bi bi-database"></i> Data Sasaran Program
               </a>
             </li>
@@ -161,6 +161,15 @@
         collapse.setAttribute("id", "profileSidebarMobile");
       }
       document.getElementById("sidebarMobile").appendChild(cloneMobile);
+      // Tutup sidebar mobile jika menu diklik
+document.getElementById("sidebarOffcanvas").addEventListener("click", function (e) {
+  const target = e.target.closest("a[data-close='true']");
+  if (target && window.innerWidth < 768) {
+    const offcanvas = bootstrap.Offcanvas.getInstance(document.getElementById("sidebarOffcanvas"));
+    if (offcanvas) offcanvas.hide();
+  }
+});
+
     });
   </script>
 </body>
